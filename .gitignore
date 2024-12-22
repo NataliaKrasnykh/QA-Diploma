@@ -44,8 +44,8 @@ out/
 !**/src/main/**
 !**/src/test/**
 
+
 .allure/
 db_mysql/
 db_postgres/
-.main
 data/
