@@ -2,9 +2,6 @@ package ru.netology.javaqa.datahelp;
 
 import lombok.SneakyThrows;
 import org.apache.commons.dbutils.QueryRunner;
-import org.apache.commons.dbutils.handlers.ScalarHandler;
-
-
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -38,16 +35,26 @@ public class SQLHelper {
     }
 
     @SneakyThrows
-    public static String getDebitInfo() {
+    public static String getCreditInfo() {
+        var codeSQL = "SELECT status FROM credit_request_entity ORDER BY created DESC LIMIT 1;";
         var conn = getConn();
-        var codeSQL = "SELECT * FROM payment_entity ORDER BY created DESC LIMIT 1;";
-        return QUERY_RUNNER.query(conn, codeSQL, new ScalarHandler<>());
+        var countStatement = conn.createStatement();
+        var resultSet = countStatement.executeQuery(codeSQL);
+        if (resultSet.next()) {
+            return resultSet.getString("status");
+        }
+        return null;
     }
 
     @SneakyThrows
-    public static String getCreditInfo() {
+    public static String getDebitInfo() {
+        var codeSQL = "SELECT status FROM payment_entity ORDER BY created DESC LIMIT 1;";
         var conn = getConn();
-        var codeSQL = "SELECT * FROM credit_request_entity ORDER BY created DESC LIMIT 1;";
-        return QUERY_RUNNER.query(conn, codeSQL, new ScalarHandler<>());
+        var countStatement = conn.createStatement();
+        var resultSet = countStatement.executeQuery(codeSQL);
+        if (resultSet.next()) {
+            return resultSet.getString("status");
+        }
+        return null;
     }
 }

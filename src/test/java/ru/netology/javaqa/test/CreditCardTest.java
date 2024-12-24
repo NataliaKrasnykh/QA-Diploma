@@ -33,183 +33,183 @@ public class CreditCardTest {
     @Test
     @DisplayName("Оплата в кредит по карте со статусом (APPROVED))")
     void shouldSuccesfillyCredit() {
-        var CreditCardPage = page.goCreditCardPage();
+        var creditCardPage = page.goCreditCardPage();
         var cardInfo = DataHelper.getApprovedCardOperation();
-        CreditCardPage.paymentForm(cardInfo);
-        CreditCardPage.operationApproved();
-        //assertEquals("APPROVED", SQLHelper.getCreditInfo());
+        creditCardPage.paymentForm(cardInfo);
+        creditCardPage.operationApproved();
+        assertEquals("APPROVED", SQLHelper.getCreditInfo());
     }
 
     @Test
     @DisplayName("Оплата в кредит по карте со статусом (DECLINED)")
     void shouldNotSuccesfillyCredit() {
-        var CreditCardPage = page.goCreditCardPage();
+        var creditCardPage = page.goCreditCardPage();
         var cardInfo = DataHelper.getDeclinedCardOperation();
-        CreditCardPage.paymentForm(cardInfo);
-        CreditCardPage.operationDeclined();
-        //assertEquals("DECLINED", SQLHelper.getCreditInfo());
+        creditCardPage.paymentForm(cardInfo);
+        creditCardPage.operationDeclined();
+        assertEquals("DECLINED", SQLHelper.getCreditInfo());
     }
 
     @Test
     @DisplayName("Оплата в кредит по карте невалидным номером карты")
     void shouldCreditInvalidCardNumber() {
-        var CreditCardPage = page.goCreditCardPage();
+        var creditCardPage = page.goCreditCardPage();
         var cardInfo = DataHelper.getInvalidCardNumber();
-        CreditCardPage.paymentForm(cardInfo);
-        CreditCardPage.wrongFormat();
+        creditCardPage.paymentForm(cardInfo);
+        creditCardPage.wrongFormat();
     }
 
     @Test
     @DisplayName("Отправка пустой формы")
     void shouldCreditWithEmptyFields() {
-        var CreditCardPage = page.goCreditCardPage();
+        var creditCardPage = page.goCreditCardPage();
         var cardInfo = DataHelper.getEmptyCardInfo();
-        CreditCardPage.paymentForm(cardInfo);
-        CreditCardPage.emptyField();
+        creditCardPage.paymentForm(cardInfo);
+        creditCardPage.emptyField();
     }
 
     @Test
     @DisplayName("Оплата в кредит по карте с невалидным месяцем карты")
     void shouldCreditWithInvalidMonth() {
-        var CreditCardPage = page.goCreditCardPage();
+        var creditCardPage = page.goCreditCardPage();
         var cardInfo = DataHelper.getErrorMonth();
-        CreditCardPage.paymentForm(cardInfo);
-        CreditCardPage.invalidDate();
+        creditCardPage.paymentForm(cardInfo);
+        creditCardPage.invalidDate();
     }
 
     @Test
     @DisplayName("Оплата в кредит по карте с невалидным месяцем карты равным 00")
     void shouldCreditWithMonthNull() {
-        var CreditCardPage = page.goCreditCardPage();
+        var creditCardPage = page.goCreditCardPage();
         var cardInfo = DataHelper.getInvalidDateMonthNull();
-        CreditCardPage.paymentForm(cardInfo);
-        CreditCardPage.invalidDate();
+        creditCardPage.paymentForm(cardInfo);
+        creditCardPage.invalidDate();
     }
 
     @Test
     @DisplayName("Оплата в кредит по карте с невалидным месяцем карты в один символ")
     void shouldCreditWithMontOneDigits() {
-        var CreditCardPage = page.goCreditCardPage();
+        var creditCardPage = page.goCreditCardPage();
         var cardInfo = DataHelper.getErrorMonthOneDigits();
-        CreditCardPage.paymentForm(cardInfo);
-        CreditCardPage.wrongFormat();
+        creditCardPage.paymentForm(cardInfo);
+        creditCardPage.wrongFormat();
     }
 
     @Test
     @DisplayName("Оплата в кредит картой с истекшим сроком действия в поле Год")
     void shouldCreditWithYearExpired() {
-        var CreditCardPage = page.goCreditCardPage();
+        var creditCardPage = page.goCreditCardPage();
         var cardInfo = DataHelper.getErrorYear();
-        CreditCardPage.paymentForm(cardInfo);
-        CreditCardPage.dateExpired();
+        creditCardPage.paymentForm(cardInfo);
+        creditCardPage.dateExpired();
     }
 
     @Test
     @DisplayName("Оплата в кредит картой с невалидным годом равным нулю")
     void shouldCreditWithYearNull() {
-        var CreditCardPage = page.goCreditCardPage();
+        var creditCardPage = page.goCreditCardPage();
         var cardInfo = DataHelper.getYearNull();
-        CreditCardPage.paymentForm(cardInfo);
-        CreditCardPage.invalidDate();
+        creditCardPage.paymentForm(cardInfo);
+        creditCardPage.invalidDate();
     }
 
     @Test
     @DisplayName("Оплата в кредит по карте с невалидным годом карты в один символ")
     void shouldCreditWithYearOneDigits() {
-        var CreditCardPage = page.goCreditCardPage();
+        var creditCardPage = page.goCreditCardPage();
         var cardInfo = DataHelper.getErrorYearOneDigits();
-        CreditCardPage.paymentForm(cardInfo);
-        CreditCardPage.wrongFormat();
+        creditCardPage.paymentForm(cardInfo);
+        creditCardPage.wrongFormat();
     }
 
     @Test
     @DisplayName("Оплата в кредит картой со значением кириллицей в поле Владелец")
     void shouldCreditWithOwnerCyrillic() {
-        var CreditCardPage = page.goCreditCardPage();
+        var creditCardPage = page.goCreditCardPage();
         var cardInfo = DataHelper.getErrorOwnerCyrillic();
-        CreditCardPage.paymentForm(cardInfo);
-        CreditCardPage.wrongFormat();
+        creditCardPage.paymentForm(cardInfo);
+        creditCardPage.wrongFormat();
     }
 
     @Test
     @DisplayName("Оплата в кредит картой со значением цифры в поле Владелец")
     void shouldCreditWithOwnerNumbers() {
-        var CreditCardPage = page.goCreditCardPage();
+        var creditCardPage = page.goCreditCardPage();
         var cardInfo = DataHelper.getErrorOwnerNumbers();
-        CreditCardPage.paymentForm(cardInfo);
-        CreditCardPage.wrongFormat();
+        creditCardPage.paymentForm(cardInfo);
+        creditCardPage.wrongFormat();
     }
 
     @Test
     @DisplayName("Оплата в кредит картой со значением спецсимволы в поле Владелец (искл. - и пробел)")
     void shouldCreditWithOwnerSymbols() {
-        var CreditCardPage = page.goCreditCardPage();
+        var creditCardPage = page.goCreditCardPage();
         var cardInfo = DataHelper.getErrorOwnerSymbols();
-        CreditCardPage.paymentForm(cardInfo);
-        CreditCardPage.wrongFormat();
+        creditCardPage.paymentForm(cardInfo);
+        creditCardPage.wrongFormat();
     }
 
     @Test
     @DisplayName("Оплата в кредит картой с невалидным значением в поле CVC/CVV 1 цифра")
     void shouldCreditWithCVCOneDigits() {
-        var CreditCardPage = page.goCreditCardPage();
+        var creditCardPage = page.goCreditCardPage();
         var cardInfo = DataHelper.getErrorCVVOneDigits();
-        CreditCardPage.paymentForm(cardInfo);
-        CreditCardPage.wrongFormat();
+        creditCardPage.paymentForm(cardInfo);
+        creditCardPage.wrongFormat();
     }
 
     @Test
     @DisplayName("Оплата в кредит картой с невалидным значением в поле CVC/CVV 2 цифры")
     void shouldCreditWithCVCTwoDigits() {
-        var CreditCardPage = page.goCreditCardPage();
+        var creditCardPage = page.goCreditCardPage();
         var cardInfo = DataHelper.getErrorCVVTwoDigits();
-        CreditCardPage.paymentForm(cardInfo);
-        CreditCardPage.wrongFormat();
+        creditCardPage.paymentForm(cardInfo);
+        creditCardPage.wrongFormat();
     }
 
     @Test
     @DisplayName("Оплата в кредит по карте с пустым значением в поле Номер карты")
     void shouldCreditWithEmptyNumber() {
-        var CreditCardPage = page.goCreditCardPage();
+        var creditCardPage = page.goCreditCardPage();
         var cardInfo = DataHelper.getCardNumberEmpty();
-        CreditCardPage.paymentForm(cardInfo);
-        CreditCardPage.wrongFormat();
+        creditCardPage.paymentForm(cardInfo);
+        creditCardPage.wrongFormat();
     }
 
     @Test
     @DisplayName("Оплата в кредит по карте с пустым значением в поле Месяц")
     void shouldCreditWithEmptyMonth() {
-        var CreditCardPage = page.goCreditCardPage();
+        var creditCardPage = page.goCreditCardPage();
         var cardInfo = DataHelper.getMonthEmpty();
-        CreditCardPage.paymentForm(cardInfo);
-        CreditCardPage.wrongFormat();
+        creditCardPage.paymentForm(cardInfo);
+        creditCardPage.wrongFormat();
     }
 
     @Test
     @DisplayName("Оплата в кредит по карте с пустым значением в поле Год")
     void shouldCreditWithEmptyYear() {
-        var CreditCardPage = page.goCreditCardPage();
+        var creditCardPage = page.goCreditCardPage();
         var cardInfo = DataHelper.getYearEmpty();
-        CreditCardPage.paymentForm(cardInfo);
-        CreditCardPage.wrongFormat();
+        creditCardPage.paymentForm(cardInfo);
+        creditCardPage.wrongFormat();
     }
 
     @Test
     @DisplayName("Оплата в кредит по карте с пустым значением в поле Владелец")
     void shouldCreditWithEmptyOwner() {
-        var CreditCardPage = page.goCreditCardPage();
+        var creditCardPage = page.goCreditCardPage();
         var cardInfo = DataHelper.getOwnerEmpty();
-        CreditCardPage.paymentForm(cardInfo);
-        CreditCardPage.emptyField();
+        creditCardPage.paymentForm(cardInfo);
+        creditCardPage.emptyField();
     }
 
     @Test
     @DisplayName("Оплата в кредит по карте с пустым значением в поле CVC/CVV")
     void shouldCreditWithEmptyCVCCVV() {
-        var CreditCardPage = page.goCreditCardPage();
+        var creditCardPage = page.goCreditCardPage();
         var cardInfo = DataHelper.getErrorCVVEmpty();
-        CreditCardPage.paymentForm(cardInfo);
-        CreditCardPage.wrongFormat();
+        creditCardPage.paymentForm(cardInfo);
+        creditCardPage.wrongFormat();
     }
 }
 

@@ -3,8 +3,9 @@ package ru.netology.javaqa.data;
 import com.github.javafaker.Faker;
 import lombok.Value;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Locale;
-import java.util.Random;
 
 
 public class DataHelper {
@@ -39,17 +40,13 @@ public class DataHelper {
         return "4444 4444 4444 4442";
     }
 
-    public static String getRandomMonth() {
-        String[] month = new String[]{
-                "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"};
-        return month[new Random().nextInt(month.length)];
-    }
+    public static String getRandomMonth(int shift) {
+            return LocalDate.now().plusMonths(shift).format(DateTimeFormatter.ofPattern("MM"));
+        }
 
-    public static String getRandomYear() {
-        String[] year = new String[]{
-                "25", "26", "27", "28"};
-        return year[new Random().nextInt(year.length)];
-    }
+    public static String getRandomYear(int shift) {
+            return LocalDate.now().plusYears(shift).format(DateTimeFormatter.ofPattern("yy"));
+        }
 
     public static String getcodeCVV() {
         Faker faker = new Faker();
@@ -106,85 +103,85 @@ public class DataHelper {
     }
 
     public static CardInfo getApprovedCardOperation() {
-        return new CardInfo(getApprovedCardNumber(), getRandomMonth(), getRandomYear(), getOwnerLatin(), getcodeCVV());
+        return new CardInfo(getApprovedCardNumber(), getRandomMonth(1), getRandomYear(1), getOwnerLatin(), getcodeCVV());
     }
 
     public static CardInfo getDeclinedCardOperation() {
-        return new CardInfo(getDeclinedCardNumber(), getRandomMonth(), getRandomYear(), getOwnerLatin(), getcodeCVV());
+        return new CardInfo(getDeclinedCardNumber(), getRandomMonth(1), getRandomYear(1), getOwnerLatin(), getcodeCVV());
     }
 
     //Номер карты
     public static CardInfo getInvalidCardNumber() {
-        return new CardInfo(getCardNumber15Symbols(), getRandomMonth(), getRandomYear(), getOwnerLatin(), getcodeCVV());
+        return new CardInfo(getCardNumber15Symbols(), getRandomMonth(1), getRandomYear(1), getOwnerLatin(), getcodeCVV());
     }
 
     public static CardInfo getCardNumberEmpty() {
-        return new CardInfo("", getRandomMonth(), getRandomYear(), getOwnerLatin(), getcodeCVV());
+        return new CardInfo("", getRandomMonth(1), getRandomYear(1), getOwnerLatin(), getcodeCVV());
     }
 
     //Месяц
     public static CardInfo getInvalidDateMonthNull() {
-        return new CardInfo(getApprovedCardNumber(), getNull(), getRandomYear(), getOwnerLatin(), getcodeCVV());
+        return new CardInfo(getApprovedCardNumber(), getNull(), getRandomYear(1), getOwnerLatin(), getcodeCVV());
     }
 
     public static CardInfo getErrorMonth() {
-        return new CardInfo(getApprovedCardNumber(), getInvalidMonth(), getRandomYear(), getOwnerLatin(), getcodeCVV());
+        return new CardInfo(getApprovedCardNumber(), getInvalidMonth(), getRandomYear(1), getOwnerLatin(), getcodeCVV());
     }
 
     public static CardInfo getErrorMonthOneDigits() {
-        return new CardInfo(getApprovedCardNumber(), getMonthOneDigits(), getRandomYear(), getOwnerLatin(), getcodeCVV());
+        return new CardInfo(getApprovedCardNumber(), getMonthOneDigits(), getRandomYear(1), getOwnerLatin(), getcodeCVV());
     }
 
     public static CardInfo getMonthEmpty() {
-        return new CardInfo(getApprovedCardNumber(), "", getRandomYear(), getOwnerLatin(), getcodeCVV());
+        return new CardInfo(getApprovedCardNumber(), "", getRandomYear(1), getOwnerLatin(), getcodeCVV());
     }
 
 
     //Год
     public static CardInfo getYearNull() {
-        return new CardInfo(getApprovedCardNumber(), getRandomMonth(), getNull(), getOwnerLatin(), getcodeCVV());
+        return new CardInfo(getApprovedCardNumber(), getRandomMonth(1), getNull(), getOwnerLatin(), getcodeCVV());
     }
 
     public static CardInfo getErrorYearOneDigits() {
-        return new CardInfo(getApprovedCardNumber(), getRandomMonth(), getYearOneDigits(), getOwnerLatin(), getcodeCVV());
+        return new CardInfo(getApprovedCardNumber(), getRandomMonth(1), getYearOneDigits(), getOwnerLatin(), getcodeCVV());
     }
 
     public static CardInfo getErrorYear() {
-        return new CardInfo(getApprovedCardNumber(), getRandomMonth(), getInvalidYear(), getOwnerLatin(), getcodeCVV());
+        return new CardInfo(getApprovedCardNumber(), getRandomMonth(1), getInvalidYear(), getOwnerLatin(), getcodeCVV());
     }
 
     public static CardInfo getYearEmpty() {
-        return new CardInfo(getApprovedCardNumber(), getRandomMonth(), "", getOwnerLatin(), getcodeCVV());
+        return new CardInfo(getApprovedCardNumber(), getRandomMonth(1), "", getOwnerLatin(), getcodeCVV());
     }
 
 
     //Владелец
     public static CardInfo getErrorOwnerCyrillic() {
-        return new CardInfo(getApprovedCardNumber(), getRandomMonth(), getRandomYear(), getOwnerCyrillic(), getcodeCVV());
+        return new CardInfo(getApprovedCardNumber(), getRandomMonth(1), getRandomYear(1), getOwnerCyrillic(), getcodeCVV());
     }
 
     public static CardInfo getOwnerEmpty() {
-        return new CardInfo(getApprovedCardNumber(), getRandomMonth(), getRandomYear(), "", getcodeCVV());
+        return new CardInfo(getApprovedCardNumber(), getRandomMonth(1), getRandomYear(1), "", getcodeCVV());
     }
 
     public static CardInfo getErrorOwnerNumbers() {
-        return new CardInfo(getApprovedCardNumber(), getRandomMonth(), getRandomYear(), getOwnerNumbers(), getcodeCVV());
+        return new CardInfo(getApprovedCardNumber(), getRandomMonth(1), getRandomYear(1), getOwnerNumbers(), getcodeCVV());
     }
 
     public static CardInfo getErrorOwnerSymbols() {
-        return new CardInfo(getApprovedCardNumber(), getRandomMonth(), getRandomYear(), getOwnerSymbols(), getcodeCVV());
+        return new CardInfo(getApprovedCardNumber(), getRandomMonth(1), getRandomYear(1), getOwnerSymbols(), getcodeCVV());
     }
 
     //CVV
     public static CardInfo getErrorCVVEmpty() {
-        return new CardInfo(getApprovedCardNumber(), getRandomMonth(), getRandomYear(), getOwnerSymbols(), "");
+        return new CardInfo(getApprovedCardNumber(), getRandomMonth(1), getRandomYear(1), getOwnerSymbols(), "");
     }
 
     public static CardInfo getErrorCVVOneDigits() {
-        return new CardInfo(getApprovedCardNumber(), getRandomMonth(), getRandomYear(), getOwnerSymbols(), getcodeCVVWithOneDigits());
+        return new CardInfo(getApprovedCardNumber(), getRandomMonth(1), getRandomYear(1), getOwnerSymbols(), getcodeCVVWithOneDigits());
     }
 
     public static CardInfo getErrorCVVTwoDigits() {
-        return new CardInfo(getApprovedCardNumber(), getRandomMonth(), getRandomYear(), getOwnerSymbols(), getcodeCVVWithTwoDigits());
+        return new CardInfo(getApprovedCardNumber(), getRandomMonth(1), getRandomYear(1), getOwnerSymbols(), getcodeCVVWithTwoDigits());
     }
 }
